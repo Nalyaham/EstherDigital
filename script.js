@@ -1,7 +1,13 @@
 'use strict';
 
 /* Shared header and footer (edit once, shows on every page). */
-const LINKS = [['Products', 'products.html'], ['About us', 'index.html#about-us'], ['Contact us', 'contact.html']];
+const ALL_LINKS = {
+  products: ['Products', 'products.html'],
+  about: ['About us', 'index.html#about-us'],
+  contact: ['Contact us', 'contact.html']
+};
+const navKeys = (document.body.dataset.nav || 'products,about,contact').split(',');
+const LINKS = navKeys.map(k => ALL_LINKS[k.trim()]).filter(Boolean);
 const logo = `<a href="index.html" aria-label="Esther Digital home" class="w-fit whitespace-nowrap py-3 text-2xl leading-tight md:text-[1.75rem]"><strong class="font-semibold">Esther</strong><span class="font-light">Digital</span></a>`;
 const link = ([t, h], c = '') => `<a href="${h}" class="${c}">${t}</a>`;
 

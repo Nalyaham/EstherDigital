@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" class="scroll-smooth scroll-pt-5">
 <head>
 <meta charset="utf-8">
@@ -9,10 +10,10 @@
 <meta property="og:description" content="Browse Esther Digital's practical ebooks and guides for reflection, emotional healing and positive change.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="{% static 'esther_digital/fonts.css' %}">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="tailwind-config.js"></script>
-<script defer src="script.js"></script>
+<script src="{% static 'esther_digital/tailwind-config.js' %}"></script>
+<script defer src="{% static 'esther_digital/script.js' %}"></script>
 </head>
 <body data-nav="contact"class="min-h-screen flex flex-col bg-page font-serif font-light text-black">
 <div id="site-header"></div>

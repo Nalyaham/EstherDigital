@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-)ml+m#&)cb1=yc9b%daf2^-iets5l=+ng+(bb@f_ruaj8pe4&p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['esther-digital.onrender.com', 'localhost']
+ALLOWED_HOSTS = ["estherdigital.onrender.com",
+    "127.0.0.1",
+    "localhost",]
 
 
 # Application definition

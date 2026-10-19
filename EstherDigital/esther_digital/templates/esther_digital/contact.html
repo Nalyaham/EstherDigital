@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" class="scroll-smooth scroll-pt-5">
 <head>
 <meta charset="utf-8">
@@ -9,10 +10,10 @@
 <meta property="og:description" content="Contact Esther Digital with your questions or comments about our digital guides and ebooks.">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="{% static 'esther_digital/fonts.css' %}">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-<script src="tailwind-config.js"></script>
-<script defer src="script.js"></script>
+<script src="{% static 'esther_digital/tailwind-config.js' %}"></script>
+<script defer src="{% static 'esther_digital/script.js' %}"></script>
 </head>
 <body data-nav = "products" class="min-h-screen flex flex-col bg-page font-serif font-light text-black">
 <div id="site-header"></div>
@@ -21,10 +22,11 @@
     <h1 class="text-2xl font-semibold leading-[1.2] md:text-[2rem]">Contact Us</h1>
     <p class="max-w-[350px] text-base leading-normal md:max-w-none md:text-lg">Have any questions or comments? Use this form to contact me at any time.</p>
   </div>
-  <form id="contact-form" class="flex w-full max-w-[331px] flex-col gap-2.5 rounded-lg border border-field bg-sand p-[30px] shadow-form max-[350px]:p-5 md:max-w-[860px]">
+  <form method="post"  id="contact-form" class="flex w-full max-w-[331px] flex-col gap-2.5 rounded-lg border border-field bg-sand p-[30px] shadow-form max-[350px]:p-5 md:max-w-[860px]">
+    {% csrf_token %}
     <div class="grid grid-cols-2 gap-2.5 py-2.5">
-      <div class="min-w-0 md:p-2.5"><input name="firstName" placeholder="First Name" aria-label="First Name" autocomplete="given-name" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg"></div>
-      <div class="min-w-0 md:p-2.5"><input name="lastName" placeholder="Last Name" aria-label="Last Name" autocomplete="family-name" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg"></div>
+      <div class="min-w-0 md:p-2.5"><input name="first_name" placeholder="First Name" aria-label="First Name" autocomplete="given-name" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg"></div>
+      <div class="min-w-0 md:p-2.5"><input name="last_name" placeholder="Last Name" aria-label="Last Name" autocomplete="family-name" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg"></div>
     </div>
     <div class="p-2.5"><input type="email" name="email" placeholder="Email Address" aria-label="Email Address" autocomplete="email" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg"></div>
     <div class="p-2.5">
@@ -32,7 +34,8 @@
       <textarea id="message" name="message" required class="w-full min-w-0 rounded-none border-0 border-b border-black bg-transparent py-2 text-base font-light text-ellipsis outline-none placeholder:text-black placeholder:opacity-100 focus:border-b-2 focus:border-brand md:text-lg min-h-[70px] resize-y"></textarea>
     </div>
     <button type="submit" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95 self-start">Send Message</button>
-    <p id="form-notice" role="status" class="hidden p-2.5 text-base leading-[1.4] md:text-lg">Message delivery is not connected yet. Your message has not been sent.</p>
+    {% for m in messages %}<p role="status" class="p-2.5 text-base">{{ m }}</p>{% endfor %}
+    {% if form.errors %}<p role="alert" class="p-2.5 text-base">Please check your details and try again.</p>{% endif %}
   </form>
 </main>
 <div id="site-footer"></div>

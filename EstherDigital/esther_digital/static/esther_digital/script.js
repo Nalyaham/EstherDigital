@@ -4,7 +4,7 @@
 const ALL_LINKS = {
   products: ['Products', '/products/'],
   about: ['About us', '/#about-us'],
-  contact: ['Contact us', 'contact.html']
+  contact: ['Contact us', '/contact_us/']
 };
 const navKeys = (document.body.dataset.nav || 'products,about,contact').split(',');
 const LINKS = navKeys.map(k => ALL_LINKS[k.trim()]).filter(Boolean);
@@ -30,7 +30,7 @@ document.getElementById('site-footer').outerHTML = `
     <a href="/products/" class="text-sm hover:underline hover:underline-offset-4">Products</a>
   </div>
   <div class="flex flex-col items-center gap-5 p-2.5 md:items-start">
-    <a href="contact.html" class="text-base font-light hover:underline hover:underline-offset-4 md:text-lg">Contact us</a>
+    <a href="/contact_us/" class="text-base font-light hover:underline hover:underline-offset-4 md:text-lg">Contact us</a>
   </div>
 </footer>`;
 
@@ -53,13 +53,6 @@ menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMen
 document.addEventListener('click', e => { if (!header.contains(e.target)) setMenu(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false, true); });
 window.matchMedia('(min-width: 768px)').addEventListener('change', () => setMenu(false));
-
-/* Contact form (no message service connected yet) */
-const form = document.getElementById('contact-form');
-if (form) form.addEventListener('submit', e => {
-  e.preventDefault();
-  document.getElementById('form-notice').classList.remove('hidden');
-});
 
 /* Purchase dialog */
 const dialog = document.getElementById('purchase-dialog');

@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
+from .forms import ContactForm
+from django.contrib import messages
 
 def home(request):
     products = Product.objects.filter(is_active=True)[:3]
@@ -16,3 +18,14 @@ def product_detail(request, slug):
         "product": product,
         "files": product.files.all(),  # ordered by position
     })
+
+def contact(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()  # saves a ContactMessage row in the database
+            messages.success(request, "Thank you! Your message has been sent.")
+            return redirect("contact_us")
+    else:
+        form = ContactForm()
+    return render(request, "esther_digital/contact.html", {"form": form})

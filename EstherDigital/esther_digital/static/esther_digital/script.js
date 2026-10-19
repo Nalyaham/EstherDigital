@@ -2,13 +2,13 @@
 
 /* Shared header and footer (edit once, shows on every page). */
 const ALL_LINKS = {
-  products: ['Products', 'products.html'],
-  about: ['About us', 'index.html#about-us'],
+  products: ['Products', '/products/'],
+  about: ['About us', '/#about-us'],
   contact: ['Contact us', 'contact.html']
 };
 const navKeys = (document.body.dataset.nav || 'products,about,contact').split(',');
 const LINKS = navKeys.map(k => ALL_LINKS[k.trim()]).filter(Boolean);
-const logo = `<a href="index.html" aria-label="Esther Digital home" class="w-fit whitespace-nowrap py-3 text-2xl leading-tight md:text-[1.75rem]"><strong class="font-semibold">Esther</strong><span class="font-light">Digital</span></a>`;
+const logo = `<a href="/" aria-label="Esther Digital home" class="w-fit whitespace-nowrap py-3 text-2xl leading-tight md:text-[1.75rem]"><strong class="font-semibold">Esther</strong><span class="font-light">Digital</span></a>`;
 const link = ([t, h], c = '') => `<a href="${h}" class="${c}">${t}</a>`;
 
 document.getElementById('site-header').outerHTML = `
@@ -27,7 +27,7 @@ document.getElementById('site-footer').outerHTML = `
   <div class="flex flex-col items-center gap-5 p-2.5 md:items-start">${logo}</div>
   <div class="flex flex-col items-center gap-5 p-2.5 md:items-start">
     <h2 class="text-base font-light md:text-lg">Shop now</h2>
-    <a href="products.html" class="text-sm hover:underline hover:underline-offset-4">Products</a>
+    <a href="/products/" class="text-sm hover:underline hover:underline-offset-4">Products</a>
   </div>
   <div class="flex flex-col items-center gap-5 p-2.5 md:items-start">
     <a href="contact.html" class="text-base font-light hover:underline hover:underline-offset-4 md:text-lg">Contact us</a>

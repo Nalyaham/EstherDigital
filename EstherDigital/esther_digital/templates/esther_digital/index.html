@@ -22,15 +22,15 @@
     <div class="flex min-w-0 flex-col items-start gap-[35px] p-2.5">
       <h1 class="text-[2rem] font-normal leading-[1.1] [overflow-wrap:anywhere] md:text-5xl md:[overflow-wrap:normal]">Grow Into the Person You Want to Be</h1>
       <p class="text-base leading-[1.45] md:text-xl">Simple, affordable ebooks and resources to help you improve your relationships, build confidence and create positive change.</p>
-      <a href="products.html" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Explore guides</a>
+      <a href="{% url 'product_list' %}" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Explore guides</a>
     </div>
-    <img src="images/hero.png" alt="Hands supporting a growing green mind" class="h-[367px] w-full object-cover max-[350px]:h-[230px] md:h-[478px] md:p-2.5">
+    <img src="{% static 'esther_digital/images/hero_image.jpg' %}" alt="Hands supporting a growing green mind" class="h-[367px] w-full object-cover max-[350px]:h-[230px] md:h-[478px] md:p-2.5">
   </section>
 
   <section class="bg-sand p-2.5">
     <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 p-2.5">
       <h2 class="text-2xl font-semibold leading-[1.2] md:text-[2rem]">Products</h2>
-      <a href="products.html" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">View all
+      <a href="{% url 'product_list' %}" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">View all
         <svg aria-hidden="true" class="h-[22px] w-[30px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
     </div>
@@ -62,7 +62,7 @@
       <p class="text-base leading-normal md:text-lg">We create practical digital guides, ebooks and resources to help you build confidence, strengthen your relationships and make positive changes in your life.</p>
       <p class="text-base leading-normal md:text-lg">Our guides are available instantly, so you can read them anytime, anywhere, on your phone, tablet or computer, and go at your own pace.</p>
     </div>
-    <img src="images/about.png" alt="A woman sitting peacefully among plants" loading="lazy" class="aspect-square w-full rounded-[15px] object-cover">
+    <img src="{% static 'esther_digital/images/about_image.jpeg' %}" alt="A woman sitting peacefully among plants" loading="lazy" class="aspect-square w-full rounded-[15px] object-cover">
   </section>
 </main>
 <div id="site-footer"></div>

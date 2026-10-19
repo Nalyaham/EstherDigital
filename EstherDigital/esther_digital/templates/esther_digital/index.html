@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="scroll-smooth scroll-pt-5">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grow Into the Person You Want to Be | Esther Digital</title>
+<meta name="description" content="Simple, affordable ebooks and resources to improve your relationships, build confidence and create positive change.">
+<meta property="og:title" content="Grow Into the Person You Want to Be | Esther Digital">
+<meta property="og:description" content="Simple, affordable ebooks and resources to improve your relationships, build confidence and create positive change.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="{% static 'esther_digital/fonts.css' %}">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="{% static 'esther_digital/tailwind-config.js' %}"></script>
+<script defer src="{% static 'esther_digital/script.js' %}"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-page font-serif font-light text-black">
+<div id="site-header"></div>
+<main class="flex flex-1 flex-col gap-[57px] pt-[57px]">
+  <section class="grid grid-cols-2 items-center gap-2.5 p-2.5 max-[350px]:grid-cols-1 md:gap-0">
+    <div class="flex min-w-0 flex-col items-start gap-[35px] p-2.5">
+      <h1 class="text-[2rem] font-normal leading-[1.1] [overflow-wrap:anywhere] md:text-5xl md:[overflow-wrap:normal]">Grow Into the Person You Want to Be</h1>
+      <p class="text-base leading-[1.45] md:text-xl">Simple, affordable ebooks and resources to help you improve your relationships, build confidence and create positive change.</p>
+      <a href="products.html" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Explore guides</a>
+    </div>
+    <img src="images/hero.png" alt="Hands supporting a growing green mind" class="h-[367px] w-full object-cover max-[350px]:h-[230px] md:h-[478px] md:p-2.5">
+  </section>
+
+  <section class="bg-sand p-2.5">
+    <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 p-2.5">
+      <h2 class="text-2xl font-semibold leading-[1.2] md:text-[2rem]">Products</h2>
+      <a href="products.html" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">View all
+        <svg aria-hidden="true" class="h-[22px] w-[30px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="flex gap-[74px] overflow-x-auto p-2.5 md:px-2.5 md:py-5">
+      {% for product in products %}
+      <article class="flex w-[204px] shrink-0 flex-col items-center gap-[13px] overflow-hidden rounded border border-line shadow-card md:w-[380px] md:border-0 md:p-2.5 md:shadow-none">
+        {% with product.cover_image as img %}
+        <a href="details.html" aria-label="View The Ultimate Breakup Recovery Bundle"><img src="{{ img }}" alt="The Ultimate Breakup Recovery Bundle ebook cover" loading="lazy" class="aspect-[202/215] w-[202px] object-cover md:aspect-auto md:h-[341px] md:w-[272px]"></a>
+        {% endwith %}
+        <div class="flex w-full flex-col items-center gap-[17px] p-2.5 text-center md:gap-[31px]">
+          <h3 class="text-lg font-normal leading-tight md:text-xl"><a href="{% url 'product_detail' product.slug %}">{{ product.title }}</a></h3>
+          <p class="text-base font-normal text-brand md:text-lg">{{ product.price }}</p>
+        </div>
+      </article>
+      {% endfor %}
+      <article class="hidden w-[204px] shrink-0 flex-col items-center gap-[13px] overflow-hidden rounded border border-line shadow-card max-md:flex">
+        <a href="details.html" aria-label="View The Ultimate Breakup Recovery Bundle"><img src="images/cover.png" alt="The Ultimate Breakup Recovery Bundle ebook cover" loading="lazy" class="aspect-[202/215] w-[202px] object-cover"></a>
+        <div class="flex w-full flex-col items-center gap-[17px] p-2.5 text-center">
+          <h3 class="text-lg font-normal leading-tight"><a href="details.html">The Ultimate Breakup Recovery Bundle</a></h3>
+          <p class="text-base font-normal text-brand">$ 17.00</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="about-us" class="grid items-start gap-2.5 p-5 md:grid-cols-2 md:items-center">
+    <div class="flex flex-col gap-2.5 p-2.5 md:gap-5">
+      <h2 class="p-2.5 text-center text-2xl font-semibold leading-[1.2] md:text-[2rem] md:text-left">About us</h2>
+      <p class="text-base leading-normal md:text-lg">We create practical digital guides, ebooks and resources to help you build confidence, strengthen your relationships and make positive changes in your life.</p>
+      <p class="text-base leading-normal md:text-lg">Our guides are available instantly, so you can read them anytime, anywhere, on your phone, tablet or computer, and go at your own pace.</p>
+    </div>
+    <img src="images/about.png" alt="A woman sitting peacefully among plants" loading="lazy" class="aspect-square w-full rounded-[15px] object-cover">
+  </section>
+</main>
+<div id="site-footer"></div>
+</body>
+</html>

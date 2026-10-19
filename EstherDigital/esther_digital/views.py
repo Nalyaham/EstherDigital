@@ -3,16 +3,16 @@ from .models import Product
 
 def home(request):
     products = Product.objects.filter(is_active=True)[:3]
-    return render(request, "index.html", {"products": products})
+    return render(request, "esther_digital/index.html", {"products": products})
 
 def products_list(request):
     products = Product.objects.filter(is_active=True)
-    return render(request, "products.html", {"products": products})
+    return render(request, "esther_digital/products.html", {"products": products})
 
 def product_detail(request, slug):
     """details.html: one product, found by its slug."""
     product = get_object_or_404(Product, slug=slug, is_active=True)
-    return render(request, "details.html", {
+    return render(request, "esther_digital/details.html", {
         "product": product,
         "files": product.files.all(),  # ordered by position
     })

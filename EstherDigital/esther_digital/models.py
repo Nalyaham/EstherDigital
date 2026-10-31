@@ -12,6 +12,8 @@ class Product(models.Model):
     cover_image = models.ImageField(upload_to="covers/")
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    dodo_product_id = models.CharField(max_length=50, blank=True)
+
  
     class Meta:
         ordering = ["-created_at"]

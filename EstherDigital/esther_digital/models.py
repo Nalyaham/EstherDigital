@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+import uuid
 
  
 class Product(models.Model):
@@ -56,3 +57,4 @@ class ContactMessage(models.Model):
  
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.created_at:%Y-%m-%d}"
+

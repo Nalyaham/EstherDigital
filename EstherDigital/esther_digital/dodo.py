@@ -2,8 +2,14 @@ from django.conf import settings
 from dodopayments import DodoPayments
 
 def create_dodo_product(product):
+    key = settings.DODO_PAYMENTS_API_TEST_KEY
+    if not key:
+        raise RuntimeError(
+            "DODO_PAYMENTS_API_TEST_KEY is empty. Set it as an environment "
+            "variable or load it from a .env file, then restart the server."
+        )
     client = DodoPayments(
-        bearer_token=settings.DODO_PAYMENTS_API_KEY,
+        bearer_token=settings.DODO_PAYMENTS_API_TEST_KEY,
         environment=settings.DODO_ENVIRONMENT,
     )
 

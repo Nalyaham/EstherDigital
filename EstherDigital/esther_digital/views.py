@@ -66,6 +66,36 @@ def create_checkout(request, slug):
     order.save(update_fields=["dodo_session_id"])
     return redirect(session.checkout_url)
 
+@csrf_exempt
+@require_POST
+def dodo_webhook(request):
+    try:
+        event = dodo.webhooks.unwrap(request.body, headers=dict(request.headers))
+    except Exception:
+        return HttpResponse(status=400)  # bad signature or malformed payload
+
+    if event.type == "payment.failed":
+        data = event.data
+        try:
+            Order.objects.filter(
+                token=(data.metadata or {}).get("order_id"), status="pending"
+            ).update(
+                status="paid",
+                dodo_payment_id=data.payment_id,
+                email=data.customer.email,
+            )
+        except Exception:
+            pass  # unknown or malformed order id: ignore, still acknowledge
+    return HttpResponse(status=200)
+
+
+def order_status(request, token):
+    order = get_object_or_404(Order, token=token)
+    return render(request, "esther_digital/order_status.html", {
+        "order": order,
+        "files": order.product.files.all() if order.status == "paid" else [],
+    })
+
 def order_status(request, token):
     order = get_object_or_404(Order, token=token)
     return render(request, "esther_digital/order_status.html", {

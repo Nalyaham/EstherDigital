@@ -31,7 +31,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["estherdigital.onrender.com",
     "127.0.0.1",
-    "localhost",]
+    "localhost",
+    "unbutton-excess-laborious.ngrok-free.dev"]
 
 
 # Application definition

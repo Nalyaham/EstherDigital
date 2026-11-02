@@ -9,6 +9,9 @@ from dodopayments import DodoPayments
 from django.conf import settings
 import os
 from django.urls import reverse
+import logging
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     products = Product.objects.filter(is_active=True)[:3]
@@ -39,6 +42,7 @@ def contact(request):
 
 dodo = DodoPayments(
     bearer_token=settings.DODO_PAYMENTS_API_TEST_KEY,
+    webhook_key = settings.DODO_PAYMENTS_WEBHOOK_KEY,
     environment=settings.DODO_ENVIRONMENT,
 )
 
@@ -70,8 +74,16 @@ def create_checkout(request, slug):
 @require_POST
 def dodo_webhook(request):
     try:
-        event = dodo.webhooks.unwrap(request.body, headers=dict(request.headers))
+        event = dodo.webhooks.unwrap(
+            request.body,
+            headers={
+                "webhook-id": request.headers.get("webhook-id", ""),
+                "webhook-signature": request.headers.get("webhook-signature", ""),
+                "webhook-timestamp": request.headers.get("webhook-timestamp", ""),
+            },
+        )
     except Exception:
+        logger.exception("Dodo webhook verification failed")
         return HttpResponse(status=400)  # bad signature or malformed payload
 
     if event.type == "payment.failed":
@@ -88,13 +100,6 @@ def dodo_webhook(request):
             pass  # unknown or malformed order id: ignore, still acknowledge
     return HttpResponse(status=200)
 
-
-def order_status(request, token):
-    order = get_object_or_404(Order, token=token)
-    return render(request, "esther_digital/order_status.html", {
-        "order": order,
-        "files": order.product.files.all() if order.status == "paid" else [],
-    })
 
 def order_status(request, token):
     order = get_object_or_404(Order, token=token)

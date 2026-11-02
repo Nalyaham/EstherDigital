@@ -58,3 +58,12 @@ class ContactMessage(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} - {self.created_at:%Y-%m-%d}"
 
+class Order(models.Model):
+    STATUS = [("pending", "Pending"), ("paid", "Paid")]
+    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="orders")
+    status = models.CharField(max_length=10, choices=STATUS, default="pending")
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    email = models.EmailField(blank=True)
+    dodo_session_id = models.CharField(max_length=100, blank=True)
+    dodo_payment_id = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)

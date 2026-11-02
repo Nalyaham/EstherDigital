@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" class="scroll-smooth scroll-pt-5">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ultimate Breakup Recovery Bundle | Esther Digital</title>
+<meta name="description" content="Four digital resources to help you reflect, heal, rebuild confidence and move forward after a breakup. $17.00.">
+<meta property="og:title" content="The Ultimate Breakup Recovery Bundle | Esther Digital">
+<meta property="og:description" content="Four digital resources to help you reflect, heal, rebuild confidence and move forward after a breakup. $17.00.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="{% static 'esther_digital/fonts.css' %}">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="{% static 'esther_digital/tailwind-config.js' %}"></script>
+<script defer src="{% static 'esther_digital/script.js' %}"></script>
+</head>
+<body class="min-h-screen flex flex-col bg-page font-serif font-light text-black">
+<main class="flex flex-1 flex-col gap-[57px] pt-[57px]">
+    {% if order.status == "paid" %}
+    <h1>Thank you!</h1>
+    {% else %}
+    <h1> Payment failed! </h1>
+    <a href="{% url 'home' %}" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Back Home</a>
+    {% endif %}
+</main>
+</body>

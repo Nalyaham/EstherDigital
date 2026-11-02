@@ -26,7 +26,10 @@
     <div class="flex min-w-0 flex-col items-start gap-[35px] p-2.5">
       <h1 class="text-[2rem] font-normal leading-[1.1] md:text-5xl">{{ product.title }}</h1>
       <p class="text-base font-normal text-brand md:text-lg">{{ product.price }}</p>
-      <button type="button" id="buy-button" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Buy Now</button>
+      <form method="post" action="{% url 'create_checkout' product.slug %}">
+      {% csrf_token %}
+        <button type="submit" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Buy Now</button>
+      </form>
       <div class="text-base leading-[1.45] md:text-lg [&_p]:mb-6 [&_h2]:mb-[18px] [&_h2]:mt-[25px] [&_h2]:text-2xl [&_h2]:font-normal md:[&_h2]:text-[2rem] [&_h3]:mb-2 [&_h3]:text-lg [&_h3]:font-normal md:[&_h3]:text-xl [&_ul]:mb-6 [&_li]:mb-[7px]">
         <p>{{ product.description }}</p>
       </div>

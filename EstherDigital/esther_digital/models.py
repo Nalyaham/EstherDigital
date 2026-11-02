@@ -1,7 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
 import uuid
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
 
+private_storage = FileSystemStorage(location=settings.BASE_DIR)
  
 class Product(models.Model):
     title = models.CharField(max_length=200)
@@ -34,7 +37,7 @@ class ProductFile(models.Model):
     product = models.ForeignKey(Product, related_name="files", on_delete=models.CASCADE)
     title = models.CharField(max_length=200)  # e.g. "Emotional Healing Workbook"
     # Store in PRIVATE storage (not public MEDIA) and serve through a view.
-    file = models.FileField(upload_to="private_products/")
+    file = models.FileField(storage=private_storage,upload_to="private_products/")
     position = models.PositiveSmallIntegerField(default=0)
  
     class Meta:

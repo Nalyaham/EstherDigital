@@ -19,6 +19,9 @@
 <main class="flex flex-1 flex-col gap-[57px] pt-[57px]">
     {% if order.status == "paid" %}
     <h1>Thank you!</h1>
+    {% for f in files %}
+    <a href="{% url 'download_file' order.token f.id %}">Download {{ f.title }}</a>
+  {% endfor %}
     <a href="{% url 'home' %}" class="inline-flex min-h-[42px] cursor-pointer items-center justify-center gap-2.5 rounded-lg bg-brand px-[15px] py-2.5 text-lg font-light transition hover:brightness-95">Back Home</a>
     {% else %}
     <h1> Payment failed! </h1>

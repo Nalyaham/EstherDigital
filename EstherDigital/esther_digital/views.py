@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Order
+from .models import Product, Order, ProductFile
 from .forms import ContactForm
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
@@ -107,3 +107,14 @@ def order_status(request, token):
         "order": order,
         "files": order.product.files.all() if order.status == "paid" else [],
     })
+
+def download_file(request, token, file_id):
+    """
+    This view takes in the token and file id of the product and gets the order with the same token.
+    It then gets the product file with the same file_id and it's product is the same as the one
+    whose satus is paid. 
+    """
+    order = get_object_or_404(Order, token=token, status="paid")
+    pf = get_object_or_404(ProductFile, pk=file_id, product=order.product)
+    return FileResponse(pf.file.open("rb"), as_attachment=True,
+                        filename=os.path.basename(pf.file.name))
